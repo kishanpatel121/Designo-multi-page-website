@@ -16,3 +16,30 @@ openBtn.addEventListener("click", () => {
   closeBtn.style.display = "block";
   headerElement.classList.add("header");
 });
+
+document.addEventListener(
+  "blur",
+  function (event) {
+    // Validate the field
+    const isValid = event.target.validity.valid;
+    // const message = event.target.validationMessage;
+    // console.log(message)
+    const connectedValidationId = event.target.getAttribute("aria-describedby");
+    const connectedValidation = connectedValidationId
+      ? document.getElementById(connectedValidationId)
+      : false;
+
+    console.log(connectedValidationId);
+
+    if (connectedValidationId === "email-validation") {
+      connectedValidation.innerHTML =
+        "Please use a valid email address <img class='error-icon' src='./assets/contact/desktop/icon-error.svg'>";
+    } else if (connectedValidation && !isValid) {
+      connectedValidation.innerHTML =
+        "Can't be empty <img class='error-icon' src='./assets/contact/desktop/icon-error.svg'>";
+    } else {
+      connectedValidation.innerText = "";
+    }
+  },
+  true
+);

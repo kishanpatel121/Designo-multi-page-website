@@ -2,6 +2,7 @@
   --light-safron: hsla(10, 72%, 66%, 1);
   --btn-hover-safron: hsla(10, 100%, 80%, 1);
   --hover-safron: hsla(10, 72%, 66%, 0.8);
+  --bg-lighter-safron: hsla(14, 76%, 97%, 1);
   --white: hsla(0, 0%, 100%, 1);
   --cyan: hsla(264, 5%, 20%, 1);
   --cyan-secondary: hsla(264, 4%, 11%, 1);
@@ -148,15 +149,17 @@ p {
   background-color: var(--white);
 }
 
-.btn-white:hover,
-.btn-white:focus {
-  color: var(--white);
-  background-color: var(--btn-hover-safron);
-}
-
 .btn-color {
   color: var(--white);
   background-color: var(--light-safron);
+}
+
+.btn-white:hover,
+.btn-white:focus,
+.btn-color:hover,
+.btn-color:focus {
+  color: var(--white);
+  background-color: var(--btn-hover-safron);
 }
 
 /* ---------------- */
@@ -165,13 +168,13 @@ p {
 
 /* Header */
 
-.header {
+/* .header {
   position: fixed;
   width: 100%;
   background-color: var(--white);
   height: 98px;
   z-index: 999;
-}
+} */
 
 .header-flex {
   display: flex;
@@ -191,18 +194,18 @@ p {
 .nav {
   position: fixed;
   background-color: hsla(0, 0%, 0%, 0.5);
-  top: -100%;
+  top: 98px; /* -100% */
   right: 0;
   bottom: 0;
-  left: 0;
+  left: -100%; /* 0 */
   width: 100%;
   height: 100%;
-  transform: translateY(0);
+  transform: translateX(0); /* translateY(0) */
   transition: transform 500ms;
 }
 
 .navigation-open {
-  transform: translateY(calc(100% + 98px));
+  transform: translateX(100%); /* translateY(calc(100% + 98px)) */
 }
 
 .navigation-open .nav-list {
@@ -211,8 +214,8 @@ p {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  transform: translateX(0);
-  transition: transform 500ms;
+  /* transform: translateX(0);
+  transition: transform 500ms; */
 }
 
 .navigation-open .nav-link {
@@ -254,11 +257,11 @@ p {
 
 /* Main */
 @media (min-width: 1150px) {
-  main {
+  .main-leaf {
     position: relative;
   }
 
-  main::before {
+  .main-leaf::before {
     content: "";
     position: absolute;
     width: 1006px;
@@ -817,6 +820,12 @@ footer {
   .secondary-footer::before {
     display: none;
   }
+
+  .footer-half-leaf::before {
+    right: -500px;
+    top: -1400px;
+    transform: rotate(0);
+  }
 }
 
 /* ------------------------------- */
@@ -1005,7 +1014,6 @@ footer {
     background-image: linear-gradient(var(--hover-safron), var(--hover-safron)),
       url(./assets/home/desktop/image-web-design-small.jpg);
   }
-
 }
 
 /* -------------- */
@@ -1014,25 +1022,24 @@ footer {
 
 .hero-about {
   height: auto;
+  background: url(./assets/about/mobile/bg-pattern-hero-about-mobile.svg) right
+      top -100%/200% no-repeat,
+    var(--light-safron);
 }
 
 .hero-about.container,
-.about-card.container {
+.card-2.container {
   padding: 0;
 }
 
-.hero-about .hero-flex {
-  align-items: stretch;
-}
-
-.hero-about .hero-flex .hero-detail,
+.hero-about-detail,
 .about-card-detail {
   margin: 0;
   padding: 5em 1.5em;
 }
 
 .hero-image-container {
-  background-image: url(./assets/about/mobile/image-about-hero.jpg);
+  background: url(./assets/about/mobile/image-about-hero.jpg) center/cover;
 }
 
 .about-card {
@@ -1040,24 +1047,21 @@ footer {
   color: var(--cyan);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   text-align: center;
 }
 
 .world-class-image {
-  background-image: url(./assets/about/mobile/image-world-class-talent.jpg);
+  background: url(./assets/about/mobile/image-world-class-talent.jpg)
+    center/cover;
 }
 
 .real-deal-image {
-  background-image: url(./assets/about/mobile/image-real-deal.jpg);
+  background: url(./assets/about/mobile/image-real-deal.jpg) center/cover;
 }
 
 .hero-image-container,
 .world-class-image,
 .real-deal-image {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   width: 100%;
   height: 50vh;
   max-height: 400px;
@@ -1087,18 +1091,51 @@ footer {
   max-width: 182px;
 }
 
+.canada-bg,
+.australia-bg,
+.uk-bg {
+  position: relative;
+}
+
+.canada-bg::before,
+.australia-bg::before,
+.uk-bg::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: url(./assets/shared/desktop/bg-pattern-small-circle.svg) 0 0
+    no-repeat;
+  background-size: contain;
+}
+
+.canada-bg::before {
+  transform: rotate(90deg);
+}
+
+.uk-bg::before {
+  transform: rotate(-90deg);
+}
+
+.feature-detail h4 {
+  margin-bottom: 1.6em;
+}
+
 @media (min-width: 770px) {
   .hero-about {
     margin-bottom: 7.5em;
   }
 
-  .hero-about .hero-flex .hero-detail {
+  .hero-about-detail {
     padding: 4em 0;
-    margin: 0 auto;
-    width: 95%;
+    width: 98%;
   }
 
-  .about-card {
+  .card-2,
+  .hero-about {
     border-radius: 15px;
   }
 
@@ -1106,48 +1143,314 @@ footer {
   .world-class-image,
   .real-deal-image {
     border-radius: 15px 15px 0 0;
+    max-height: 320px;
   }
 
   .hero-image-container {
-    background-image: url(./assets/about/tablet/image-about-hero.jpg);
+    background: url(./assets/about/tablet/image-about-hero.jpg) top/cover
+      no-repeat;
   }
 
   .world-class-image {
-    background-image: url(./assets/about/tablet/image-world-class-talent.jpg);
+    background: url(./assets/about/tablet/image-world-class-talent.jpg)
+      top/cover no-repeat;
   }
 
   .real-deal-image {
-    background-image: url(./assets/about/tablet/image-real-deal.jpg);
+    background: url(./assets/about/tablet/image-real-deal.jpg) top/cover
+      no-repeat;
   }
 }
 
 @media (min-width: 1150px) {
-  .hero-about .hero-flex {
+  .hero-about {
+    background: url(./assets/about/desktop/bg-pattern-hero-about-desktop.svg)
+        left bottom/60%,
+      var(--light-safron);
+    height: 480px;
+    border-radius: 15px;
+  }
+
+  .hero-about-flex {
     flex-direction: row-reverse;
-    justify-content: space-between;
     padding: 0;
   }
 
-  .hero-about .hero-flex .hero-detail {
+  .hero-about-detail {
+    width: 120%;
     padding-left: 3em;
   }
 
   .hero-image-container,
   .world-class-image,
   .real-deal-image {
-    width: 70%;
     border-radius: 0;
   }
 
   .hero-image-container {
-    background-image: url(./assets/about/desktop/image-about-hero.jpg);
+    background: url(./assets/about/desktop/image-about-hero.jpg) left top/cover
+      no-repeat;
+    border-radius: 0 15px 15px 0;
+    height: 480px;
+    max-height: 480px;
+  }
+
+  .world-class-image,
+  .real-deal-image {
+    height: 640px;
+    max-height: 640px;
   }
 
   .world-class-image {
     background-image: url(./assets/about/desktop/image-world-class-talent.jpg);
+    border-radius: 15px 0 0 15px;
   }
 
   .real-deal-image {
     background-image: url(./assets/about/desktop/image-real-deal.jpg);
+    border-radius: 0 15px 15px 0;
+  }
+
+  .card-2 {
+    flex-direction: row;
+  }
+
+  .reverse-card-2 {
+    flex-direction: row-reverse;
+  }
+
+  .about-card-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 9.6rem;
+    width: 120%;
+  }
+
+  .location-flex {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+/* ---------- */
+/* Contact    */
+/* ---------- */
+
+.contact {
+  background: url(./assets/contact/mobile/bg-pattern-hero-contact-mobile.svg)
+      left 25% top/220% no-repeat,
+    var(--light-safron);
+}
+
+.contact .hero-about-flex .hero-about-detail {
+  padding-bottom: 0;
+}
+
+.hero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 3em 1.5em 4.5em;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--white);
+  color: var(--white);
+  padding: 1.1rem 1.35rem;
+  resize: none;
+  opacity: 0.5;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--white);
+  font-weight: 500;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  border-block-width: 3px;
+  outline: none;
+  opacity: 1;
+}
+
+.input-container {
+  position: relative;
+  align-items: baseline;
+}
+
+.validation-message {
+  position: absolute;
+  display: flex;
+  font-size: 1.2rem;
+  top: 25%;
+  right: 0;
+  height: 30px;
+  padding: 5px;
+  align-items: center;
+}
+
+.error-icon {
+  display: inline-block;
+  width: 20px;
+  margin: 0 1em;
+}
+
+.hero-form .btn {
+  align-self: center;
+  padding: 1em 3em;
+}
+
+@media (min-width: 770px) {
+  .contact .hero-about-flex .hero-about-detail {
+    text-align: left;
+    padding-inline: 1.5em;
+    width: 90%;
+  }
+
+  .contact .hero-about-flex .hero-about-detail p {
+    margin-left: 0;
+  }
+
+  .hero-form {
+    width: 90%;
+  }
+
+  .hero-form .btn {
+    align-self: flex-end;
+  }
+}
+
+@media (min-width: 1150px) {
+  .contact {
+    height: auto;
+    background: url(./assets/contact/desktop/bg-pattern-hero-desktop.svg)
+        left/50% no-repeat,
+      var(--light-safron);
+  }
+
+  .contact .hero-flex {
+    flex-direction: row;
+    justify-content: center;
+    margin: 3.5em 6em;
+  }
+
+  .contact .hero-flex .hero-detail {
+    padding: 0;
+    width: 120%;
+  }
+}
+
+/* ----------- */
+/* Location    */
+/* ----------- */
+
+.location-card {
+  margin-bottom: 2.5em;
+}
+
+.location-card-detail {
+  background-color: var(--bg-lighter-safron);
+  color: var(--cyan);
+  text-align: center;
+  padding: 5em 1.5em;
+}
+
+.location-card-detail h2 {
+  color: var(--light-safron);
+}
+
+.location-card-detail h5 {
+  margin-top: 1.5em;
+}
+
+.canada-map-image {
+  background: url(./assets/locations/tablet/image-map-canada.png) right/cover;
+}
+
+.australia-map-image {
+  background: url(./assets/locations/tablet/image-map-australia.png) right/cover;
+}
+
+.uk-map-image {
+  background: url(./assets/locations/tablet/image-map-uk.png) right/cover;
+}
+
+.canada-map-image,
+.australia-map-image,
+.uk-map-image {
+  width: 100%;
+  height: 50vh;
+  max-height: 320px;
+}
+
+@media (min-width: 770px) {
+  .location-card-detail {
+    border-radius: 15px;
+    text-align: left;
+    padding: 5.5em 4.5em;
+  }
+
+  .contact-detail {
+    display: flex;
+  }
+
+  .contact-detail div {
+    width: 50%;
+  }
+
+  .canada-map-image,
+  .australia-map-image,
+  .uk-map-image {
+    border-radius: 15px;
+    max-height: 326px;
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1150px) {
+  .location-card {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .canada-map-image {
+    background: url(./assets/locations/desktop/image-map-canada.png) right/cover;
+  }
+
+  .australia-map-image {
+    background: url(./assets/locations/desktop/image-map-australia.png)
+      right/cover;
+  }
+
+  .uk-map-image {
+    background: url(./assets/locations/desktop/image-map-united-kingdom.png)
+      right/cover;
+  }
+
+  .location-card-reverse {
+    flex-direction: row;
+  }
+
+  .location-card-detail {
+    width: 70%;
+  }
+
+  .canada-map-image,
+  .australia-map-image,
+  .uk-map-image {
+    width: 35%;
+    margin-bottom: 0;
   }
 }
