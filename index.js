@@ -20,16 +20,11 @@ openBtn.addEventListener("click", () => {
 document.addEventListener(
   "blur",
   function (event) {
-    // Validate the field
     const isValid = event.target.validity.valid;
-    // const message = event.target.validationMessage;
-    // console.log(message)
     const connectedValidationId = event.target.getAttribute("aria-describedby");
     const connectedValidation = connectedValidationId
       ? document.getElementById(connectedValidationId)
       : false;
-
-    console.log(connectedValidationId);
 
     if (connectedValidationId === "email-validation") {
       connectedValidation.innerHTML =

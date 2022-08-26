@@ -49,7 +49,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [solution URL](https://www.frontendmentor.io/solutions/responsive-multipage-website-with-css-grid-and-flexbox-nGhQpInI4a)
 - Live Site URL: [live site URL](https://kishanpatel121.github.io/Designo-multi-page-website/)
 
 ## My process
